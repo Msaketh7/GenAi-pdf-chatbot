@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <title>PDF Chat App</title>
+  <style>
+    /* Floating PDF animation */
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-15px); }
+      100% { transform: translateY(0px); }
+    }
+
+    #pdfIcon {
+      transition: transform 0.3s ease;
+    }
+
+    #pdfIcon.float {
+      animation: float 1.5s ease-in-out infinite;
+    }
+  </style>
+</head>
+
+<body class="bg-gray-50 font-sans">
+
+  <!-- Main Container -->
+  <div class="flex items-center justify-center min-h-screen px-4 py-12">
+    <div class="bg-white shadow-xl rounded-3xl p-8 sm:p-12 max-w-2xl w-full text-center">
+
+      <!-- Floating PDF Icon -->
+      <img id="pdfIcon" src="https://cdn-icons-png.flaticon.com/512/337/337946.png" alt="PDF Icon"
+        class="mx-auto w-20 h-20 mb-6 opacity-70">
+
+      <!-- Title -->
+      <h1 class="text-4xl sm:text-5xl font-bold text-gray-900 tracking-tight">
+        Chat with Your PDFs Using AI
+      </h1>
+      <p class="mt-4 text-gray-600 text-lg sm:text-xl">
+        Effortlessly upload, process, and interact with your PDFs using our AI-powered chat interface.
+      </p>
+
+      <!-- Form -->
+      <form id="pdfForm" action="/process" method="post" enctype="multipart/form-data"
+        class="mt-8 flex flex-col sm:flex-row gap-4 items-center justify-center">
+        <input type="file" name="pdf_docs" id="pdf_docs" accept=".pdf" multiple required
+          class="block w-full text-sm text-gray-900 border rounded-lg bg-gray-50 file:mr-4
+                 file:py-2 file:px-4 file:border-0 file:text-sm file:font-semibold
+                 file:bg-blue-200 file:text-blue-700 file:cursor-pointer hover:file:bg-blue-100 shadow-sm">
+        <button id="processBtn" type="submit"
+          class="px-6 py-2 rounded-2xl bg-gradient-to-r from-green-400 via-blue-500 to-purple-600 text-white font-semibold hover:opacity-90 shadow-md transition">
+          Process PDFs
+        </button>
+      </form>
+
+      <!-- Progress Bar Card -->
+      <div id="progressContainer" class="hidden mt-8 p-4 bg-gray-100 rounded-2xl shadow-inner">
+        <div class="w-full bg-gray-300 rounded-full h-3">
+          <div id="progressBar"
+            class="bg-gradient-to-r from-green-400 via-blue-500 to-purple-500 h-3 rounded-full transition-all duration-300 ease-in-out"
+            style="width: 0%;"></div>
+        </div>
+        <p id="progressText" class="text-sm text-gray-600 mt-2 text-center font-medium">
+          Processing your PDFs...
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Script -->
+  <script>
+    const form = document.getElementById("pdfForm");
+    const progressContainer = document.getElementById("progressContainer");
+    const progressBar = document.getElementById("progressBar");
+    const progressText = document.getElementById("progressText");
+    const processBtn = document.getElementById("processBtn");
+    const pdfIcon = document.getElementById("pdfIcon");
+    const fileInput = document.getElementById("pdf_docs");
+
+    // Animate icon when file is selected
+    fileInput.addEventListener("change", () => {
+      pdfIcon.classList.add("float");
+      setTimeout(() => pdfIcon.classList.remove("float"), 3000); // float for 3s
+    });
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault(); // prevent default submit
+
+      // Show progress bar
+      progressContainer.classList.remove("hidden");
+      processBtn.disabled = true;
+      processBtn.innerText = "Processing...";
+
+      // Send form data asynchronously
+      const formData = new FormData(form);
+      fetch("/process", { method: "POST", body: formData });
+
+      // Listen to backend progress via SSE
+      const evtSource = new EventSource("/progress");
+      evtSource.onmessage = function (event) {
+        const value = parseInt(event.data);
+        progressBar.style.width = value + "%";
+        progressText.innerText = `Processing PDFs... ${value}%`;
+
+        if (value >= 100) {
+          progressText.innerText = "✅ Processing Complete!";
+          evtSource.close();
+
+          setTimeout(() => { window.location.href = "/chat"; }, 1000);
+        }
+      };
+    });
+  </script>
+
+</body>
+
+</html>

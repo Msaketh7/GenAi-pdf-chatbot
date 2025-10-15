@@ -1,0 +1,457 @@
+Traditional Large-Scale Computation
+
+= Traditionally, computation has been
+processor-bound
+
+— Relatively small amounts of data
+— Lots of complex processing
+
+= The early solution: bigger computers
+- Faster processor, more memory
+— But even this couldn’t keep up
+
+Stanford CS246H © Copyright 2010-2017 Cloudera. Alll rights reserved. Not to be reproduced or shared without prior written consent from Cloudera. 2
+Winter 2017
+Distributed Systems
+
+= The better solution: more computers
+— Distributed systems — use multiple machines
+for a single job
+
+“In pioneer days they used oxen for heavy
+pulling, and when one ox couldn’t budge a log,
+we didn’t try to grow a larger ox. We shouldn’t
+be trying for bigger computers, but for more
+systems of computers.”
+
+— Grace Hopper
+
++
+
+Stanford CS246H © Copyright 2010-2017 Cloudera. All rights reserved. Not to be reproduced or shared without prior written consent from Cloudera. 3
+Winter 2017
+Challenges with Distributed Systems
+
+= Challenges with distributed systems
+— Programming complexity
+— Keeping data and processes in sync
+— Finite bandwidth
+— Partial failures
+
+= The solution?
+—-Hadoop!
+
+Stanford CS246H © Copyright 2010-2017 Cloudera. All rights reserved. Not to be reproduced or shared without prior written consent from Cloudera. 4
+Winter 2017
+The Real Reason You’re Here
+
+&
+$ >
+—~_ —,
+-@-—
+
+Better Career Better Salary Big Companies Hiring
+ai" Be aY
+(im) a,
+
+Better Job Opportunities Big Data & Hadoop everywhere
+
+edureka!
+
+http://www.edureka.co/blog/5-reasons-to-learn-hadoop
+
+Stanford CS246H © Copyright 2010-2017 Cloudera. All rights reserved. Not to be reproduced or shared without prior written consent from Cloudera. 5
+Winter 2017
+Introduction to Hadoop and the
+Hadoop Ecosystem
+
+201509
+What is Apache Hadoop? & Nadoop,
+
+= Scalable and economical data storage, processing and analysis
+— Distributed and fault-tolerant
+— Harnesses the power of industry standard hardware
+
+= Heavily inspired by technical documents published by Google
+
+Batch Search Analytic Machine Stream Other
+Processing Engine SQL Learning Processing Applications
+
+Workload Management
+
+Data Storage
+
+Data Integration
+
+Stanford CS246H © Copyright 2010-2017 Cloudera. All rights reserved. Not to be reproduced or shared without prior written consent from Cloudera. 14
+Winter 2017
+Common Hadoop Use Cases
+
+= Extract/Transform/Load (ETL) = Collaborative filtering
+= Text mining = Prediction models
+
+= Index building = Sentiment analysis
+
+= Graph creation and analysis = Risk assessment
+
+= Pattern recognition
+
+= What do these workloads have in common? Nature of the data...
+-Volume
+- Velocity
+- Variety
+
+Stanford CS246H © Copyright 2010-2017 Cloudera. All rights reserved. Not to be reproduced or shared without prior written consent from Cloudera. 15
+Winter 2017
+Distributed Systems: The Data Bottleneck (1)
+
+= Traditionally, data is stored in a central location
+= Data is copied to processors at runtime
+
+= Fine for limited amounts of data
+
+(i
+
+Stanford CS246H © Copyright 2010-2017 Cloudera. All rights reserved. Not to be reproduced or shared without prior written consent from Cloudera. 16
+Winter 2017
+Distributed Systems: The Data Bottleneck (2)
+
+= Modern systems have much more data
+—terabytes+ a day
+— petabytes+ total
+
+=" We need a new approach...
+
+Stanford CS246H © Copyright 2010-2017 Cloudera. All rights reserved. Not to be reproduced or shared without prior written consent from Cloudera. 17
+Winter 2017
+Big Data Processing with Hadoop
+
+= Hadoop introduced a radical new approach:
+- Bring the program to the data rather than the data to the program
+
+= Based on two key concepts
+- Distribute data when the data is stored
+
+— Run computation where the data resides A Hadoop Cluster
+
+—————
+
+=i
+
+Stanford CS246H © Copyright 2010-2017 Cloudera. All rights reserved. Not to be reproduced or shared without prior written consent from Cloudera. 18
+Winter 2017
+
+Core Hadoop
+
+Processing
+
+A Hadoop Cluster
+
+* Spark
+* MapReduce
+
+Stanford CS246H
+Winter 2017
+
+Resource Management
+
+Storage
+
+YARN * HDFS
+
+© Copyright 2010-2017 Cloudera. All rights reserved. Not to be reproduced or shared without prior written consent from Cloudera.
+
+19
+Big Data Processing
+
+me> Eae> [o>
+
+Data Analysis
+and Exploration
+
+Stanford CS246H © Copyright 2010-2017 Cloudera. All rights reserved. Not to be reproduced or shared without prior written consent from Cloudera. 20
+Winter 2017
+
+Data Sources Data Storage Data Processing
+
+xX
+~~
+~~ SS
+a
+
+pl
+
+Data Ingest and Storage
+
+= Hadoop typically ingests data from many
+sources and in many formats
+
+- Traditional data management systems, e.g.
+databases
+
+- Logs and other machine generated data
+(event data) Data Sources _ Data Storage
+
+— Imported files
+
+Stanford CS246H © Copyright 2010-2017 Cloudera. All rights reserved. Not to be reproduced or shared without prior written consent from Cloudera. 21
+Winter 2017
+Data Storage
+
+= Hadoop Distributed File System (HDFS) egaep
+— HDFS is the storage layer for Hadoop
+— Provides inexpensive reliable storage for massive
+amounts of data on industry-standard hardware eeosticeison ts) |
+»
+
+- Data is distributed when stored
+
+- Covered later in this course
+
+= Apache HBase: The Hadoop Database HDFS
+-A NoSQL distributed database built on HDFS
+— Scales to support very large amounts of data
+
+and high throughput =
+
+-A table can have thousands of columns y
+
+- Covered in depth in Cloudera Training for Apache HBase
+
+Stanford CS246H © Copyright 2010-2017 Cloudera. All rights reserved. Not to be reproduced or shared without prior written consent from Cloudera. 22
+Winter 2017
+
+Data Ingest Tools (1)
+
+= HDFS
+- Direct file transfer
+
+= Apache Sqoop [rom relational databases |
+— High speed import to HDFS from Relationship OQOd?
+Vv
+
+> (el
+
+Database (and vice versa)
+— Supports many data storage systems
+-—e.g. Netezza, Mongo, MySQL, Teradata, Oracle
+- Covered later in this course
+
+Stanford CS246H © Copyright 2010-2017 Cloudera. All rights reserved. Not to be reproduced or shared without prior written consent from Cloudera. 23
+Winter 2017
+Data Ingest Tools (2)
+
+= Apache Flume [log data] ‘es
+- Distributed service for ingesting streaming data SE
+- Ideally suited for event data from multiple systems 4»
+— For example, log files
+- Covered later in this course OPO?
+
+= Kafka 4
+-A high throughput, scalable messaging system “4,
+- Distributed, reliable publish-subscribe system
+— Integrates with Flume and Spark Streaming
+
+Apache
+Kafka
+
+Stanford CS246H © Copyright 2010-2017 Cloudera. All rights reserved. Not to be reproduced or shared without prior written consent from Cloudera. 24
+Winter 2017
+Apache Spark: An Engine For Large-scale Data Processing
+
+= Spark is large-scale data processing engine
+
+— General purpose SEQ
+
+— Runs on Hadoop clusters and data in HDFS
+
+aks
+
+= Supports a wide range of workloads
+— Machine learning
+- Business intelligence
+- Streaming
+— Batch Processing
+
+= This course uses Spark for data processing
+
+Stanford CS246H © Copyright 2010-2017 Cloudera. All rights reserved. Not to be reproduced or shared without prior written consent from Cloudera. 25
+Winter 2017
+Hadoop MapReduce: The Original Hadoop Processing Engine
+
+= Hadoop MapReduce is the original Hadoop
+framework
+
+- Primarily Java based
+
+= Based on the MapReduce programming model
+= The core Hadoop processing engine before Spark was introduced
+
+= Still the dominant technology
+— But losing ground to Spark fast
+
+= Many existing tools are still built using MapReduce code
+
+= Has extensive and mature fault tolerance built into the framework
+
+Stanford CS246H © Copyright 2010-2017 Cloudera. All rights reserved. Not to be reproduced or shared without prior written consent from Cloudera. 26
+Winter 2017
+Apache Pig: Scripting for MapReduce
+
+= Apache Pig builds on Hadoop to offer high-level data processing
+- This is an alternative to writing low-level MapReduce code
+— Pig is especially good at joining and transforming data
+
+= The Pig interpreter runs on the client machine
+- Turns Pig Latin scripts into MapReduce or Spark jobs
+- Submits those jobs to a Hadoop cluster
+- Covered in Cloudera Data Analyst Training
+
+people = LOAD '/user/training/customers' AS (cust_id, name) ;
+orders LOAD '/user/training/orders' AS (ord_id, cust_id, cost) ;
+groups GROUP orders BY cust_id;
+
+totals FOREACH groups GENERATE group, SUM(orders.cost) AS t;
+result = JOIN totals BY group, people BY cust_id;
+DUMP result;
+
+Stanford CS246H © Copyright 2010-2017 Cloudera. All rights reserved. Not to be reproduced or shared without prior written consent from Cloudera. 27
+Winter 2017
+Cloudera Impala: High Performance SQL
+
+= Impala is a high-performance SQL engine
+— Runs on Hadoop clusters
+- Data stored in HDFS files
+— Inspired by Google’s Dremel project \
+-Very low latency — measured in milliseconds \
+— Ideal for interactive analysis
+
+= Impala supports a dialect of SQL (Impala SQL)
+— Data in HDFS modeled as database tables
+
+= Impala was developed by Cloudera
+
+— 100% open source, released under the Apache software
+license
+
+= Impala is used for data analysis in this course
+
+Stanford CS246H © Copyright 2010-2017 Cloudera. All rights reserved. Not to be reproduced or shared without prior written consent from Cloudera. 28
+Winter 2017
+Apache Hive: SQL on MapReduce
+
+= Hive is an abstraction layer on top of Hadoop
+— Hive uses a SQL-like language called HiveQL
+- Similar to Impala SQL
+— Useful for data processing and ETL
+— Impala is preferred for ad hoc analytics
+
+= Hive executes queries using MapReduce
+— Hive on Spark is available for early adopters; not yet recommended for
+
+= Hive can optionally be used for data analysis in this course
+
+Stanford CS246H © Copyright 2010-2017 Cloudera. All rights reserved. Not to be reproduced or shared without prior written consent from Cloudera. 29
+Winter 2017
+Cloudera Search: A Platform For Data Exploration
+
+= Interactive full-text search for data ina Hadoop cluster — cloudera’
+SEARCH
+
+= Allows non-technical users to access your data
+— Nearly everyone can use a search engine
+
+= Cloudera Search enhances Apache Solr
+
+— Integrates Solr with HDFS, MapReduce, HBase,
+and Flume
+
+- Supports file formats widely used with Hadoop
+—- Dynamic Web-based dashboard interface with Hue
+- Apache Sentry based security
+
+= Cloudera Search is 100% open source
+
+Stanford CS246H © Copyright 2010-2017 Cloudera. All rights reserved. Not to be reproduced or shared without prior written consent from Cloudera. 30
+Winter 2017
+Hue: The UI for Hadoop
+
+= Hue = Hadoop User Experience ql i } —
+
+= Hue provides a Web front-end to a Hadoop
+— Upload and browse data
+— Query tables in Impala and Hive
+— Run Spark and Pig jobs and workflows
+- Search
+-And much more
+
+= Makes Hadoop easier to use
+= Hue is 100% open-source
+
+= Created by Cloudera
+— Open source, released under Apache license
+
+= Hue is used throughout this course
+
+Stanford CS246H © Copyright 2010-2017 Cloudera. All rights reserved. Not to be reproduced or shared without prior written consent from Cloudera. 31
+Winter 2017
+Apache Oozie: Workflow Management
+
+= Oozie
+—Workflow engine for Hadoop jobs
+— Defines dependencies between jobs
+
+= The Oozie server submits the jobs to the server in the correct sequence
+
+map-reduce
+streaming
+|
+
+start map-reduce fork
+J a
+
+decision
+
+map-reduce
+pipes |
+
+java |
+
+Cot) —— filesystem a |
+|
+te
+
+Stanford CS246H © Copyright 2010-2017 Cloudera. All rights reserved. Not to be reproduced or shared without prior written consent from Cloudera. 32
+Winter 2017
+
+Apache Sentry: Hadoop Security
+
+= Sentry provides fine-grained access control
+(authorization) to various Hadoop ecosystem
+
+components Sentr Y.
+—Impala :
+- Hive
+- Cloudera Search
+
+= In conjunction with Kerberos authentication, Sentry
+authorization provides a complete cluster security éseniyistseetoraitorsaton |
+
+solution
+
+— Now an open-source Apache project
+
+Stanford CS246H © Copyright 2010-2017 Cloudera. All rights reserved. Not to be reproduced or shared without prior written consent from Cloudera. 33
+Winter 2017
+Bibliography
+
+The following offer more information on topics discussed in this chapter
+
+= Hadoop: The Definitive Guide (published by O’ Reilly)
+-http://tiny.cloudera.com/hadooptdg
+
+= Cloudera Essentials for Apache Hadoop — free online training
+-http://tiny.cloudera.com/esscourse
+
+Stanford CS246H © Copyright 2010-2017 Cloudera. All rights reserved. Not to be reproduced or shared without prior written consent from Cloudera. 34
+Winter 2017

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>AI PDF Chat & Writing Tools</title>
+</head>
+
+<body class="bg-gray-50 font-sans">
+
+    <!-- Main Container -->
+    <div class="max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between px-6 py-12 gap-10">
+
+        <!-- Left Section -->
+        <div class="flex-1 max-w-xl">
+            <!-- Logo -->
+
+            <!-- Title -->
+            <h1 class="mt-6 text-4xl sm:text-5xl font-bold text-gray-900 tracking-tight">
+                AI Writing & Analysis Tools for your PDFs
+            </h1>
+
+            <!-- Description -->
+            <p class="mt-4 text-gray-600 text-lg sm:text-xl leading-relaxed">
+                Break free from writer's block and explore endless language possibilities. Chat with your PDFs, analyze documents, and
+                get instant AI insights.
+            </p>
+
+            <!-- Action Buttons -->
+            <div class="mt-8 flex flex-col sm:flex-row gap-4">
+                <a href="{{ url_for('pdf_chat') }}"
+                    class="px-8 py-3 rounded-2xl bg-gradient-to-r from-green-400 via-blue-500 to-purple-600 text-white font-semibold shadow hover:opacity-90 transition">
+                    PDF Chat
+                </a>
+                <!-- You can add more buttons if needed -->
+            </div>
+        </div>
+
+        <!-- Right Section: Screenshot / Image -->
+        <div class="flex-1 flex justify-center items-center">
+            <div class="rounded-2xl shadow-xl overflow-hidden">
+                <img src="https://res.cloudinary.com/dtsuvx8dz/image/upload/v1709048322/o3ad4w8hedswhwymbhr9.png"
+                    alt="App screenshot" class="w-80 sm:w-[28rem] h-auto object-cover">
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

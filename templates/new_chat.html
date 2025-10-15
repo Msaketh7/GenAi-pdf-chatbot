@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>PDF Chat Interface</title>
+</head>
+
+<body class="bg-gray-50 font-sans">
+
+    <!-- Container -->
+    <div class="max-w-4xl mx-auto py-10 px-4 sm:px-6 lg:px-8">
+
+        <!-- Header -->
+        <div class="flex items-center justify-between mb-6">
+            <h1 class="text-3xl font-bold text-gray-900 drop-shadow-md">PDF Chat</h1>
+            <a href="/" class="px-4 py-2 rounded-lg bg-blue-500 hover:bg-blue-600 text-white font-medium shadow">
+                Back
+            </a>
+        </div>
+
+        <!-- Chat Box -->
+        <div class="bg-white rounded-2xl shadow-lg p-6 flex flex-col gap-4 h-[60vh] overflow-y-auto" id="chatContainer">
+
+            {% if chat_history %}
+                {% for message in chat_history %}
+                    {% if message.__class__.__name__ == "HumanMessage" %}
+                        <!-- User message: Right -->
+                        <div class="self-end max-w-[70%] bg-blue-500 text-white py-2 px-4 rounded-2xl rounded-br-none shadow break-words">
+                            {{ message.content }}
+                        </div>
+                    {% else %}
+                        <!-- AI message: Left -->
+                        <div class="self-start max-w-[70%] bg-gray-100 text-gray-900 py-2 px-4 rounded-2xl rounded-bl-none shadow break-words">
+                            {{ message.content }}
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            {% else %}
+                <div class="text-center text-gray-400 py-10">
+                    No messages yet. Ask a question below!
+                </div>
+            {% endif %}
+
+        </div>
+
+        <!-- Input Box -->
+        <form action="/chat" method="post" class="mt-6 flex gap-3">
+            <input type="text" name="user_question" id="user_question" required
+                class="flex-1 px-4 py-3 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-400"
+                placeholder="Type your question here...">
+            <button type="submit"
+                class="px-6 py-3 rounded-full bg-gradient-to-r from-green-400 via-blue-500 to-cyan-500 text-white font-semibold hover:opacity-90 shadow">
+                Send
+            </button>
+        </form>
+
+    </div>
+
+    <!-- Auto-scroll to bottom -->
+    <script>
+        const chatContainer = document.getElementById('chatContainer');
+        chatContainer.scrollTop = chatContainer.scrollHeight;
+    </script>
+
+</body>
+
+</html>
